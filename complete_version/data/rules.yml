@@ -1,0 +1,32 @@
+rules:
+ - rule: greet the user
+   steps:
+   - intent: greet
+   - action: utter_greet
+
+ - rule: say bye to the user
+   steps:
+   - intent: goodbye
+   - action: utter_goodbye
+
+ - rule: search a language details based on user query
+   steps:
+   - intent: lang_search
+   - action: action_lang_search
+   - action: utter_feedback
+
+ - rule: search a language's family based on user query
+   steps:
+   - intent: fam_search
+   - action: action_fam_search
+   - action: utter_feedback
+
+ - rule: respond positively when the user says thank you
+   steps:
+   - intent: thanks
+   - action: utter_thanks
+   - action: utter_feedback
+#  - rule: ask for feedback after response
+#    - intent: lang_search
+#    - action: utter_feedback
+   
