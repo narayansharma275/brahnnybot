@@ -21,12 +21,20 @@ rules:
    - action: action_fam_search
    - action: utter_feedback
 
+ - rule: search all other languages in the family of other languages based on user query
+   steps:
+   - intent: fam_lang_search
+   - action: action_famlang_search
+   - action: utter_feedback
+
+ - rule: search the ISO code of a language based on user query
+   steps:
+   - intent: iso_search
+   - action: action_iso_search
+   - action: utter_feedback    
+
  - rule: respond positively when the user says thank you
    steps:
    - intent: thanks
    - action: utter_thanks
    - action: utter_feedback
-#  - rule: ask for feedback after response
-#    - intent: lang_search
-#    - action: utter_feedback
-   
