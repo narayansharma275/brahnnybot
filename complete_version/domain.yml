@@ -73,7 +73,7 @@ actions:
 - utter_goodbye
 - action_lang_search
 - action_fam_search
-- action_fam_lang_search
+- action_famlang_search
 - action_iso_search
 - utter_thanks
 - utter_feedback

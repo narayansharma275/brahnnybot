@@ -14,6 +14,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from googletrans import Translator
 
 import pandas as pd
+import numpy as np
 import os
 
 translator = Translator(service_urls=['translate.googleapis.com'])
@@ -99,8 +100,9 @@ class ActionISOSearch(Action):
             out_row = wals_data[wals_data["Name"] == query_lang].to_dict("records")
 
             if len(out_row) > 0:
-                out_row = out_row[0]
-                out_text = "ISO కోడ్ %s" % out_row["ISO_codes"])
+                out_row = out_row[0] 
+                print(out_row)
+                out_text = "ISO కోడ్ %s" % out_row["ISO_codes"]
                 dispatcher.utter_message(text = out_text)
             else:
                 dispatcher.utter_message(text = "క్షమించండి! భాష కోసం మాకు రికార్డులు లేవు %s" % translator.translate(query_lang,dest='te').text)
@@ -125,11 +127,12 @@ class ActionFamilyLanguagesSearch(Action):
             query_lang = query_lang.lower().capitalize()
             print(query_lang)
             
-            out_row = wals_data[wals_data["Name"] == query_lang].to_dict("records")
+            out_row = family_lang = list(wals_data.loc[np.where(wals_data['Family'] == (wals_data[wals_data['Name']==query_lang]['Family'].values[0]))]['Name'].values[:10])
+
+        
 
             if len(out_row) > 0:
-                out_row = out_row[0]
-                out_text = "ఈ భాష యొక్క కుటుంబం %s" % (translator.translate(out_row["Family"],dest='te').text)
+                out_text = "ఈ కుటుంబంలోని కొన్ని ఇతర భాషలు %s" % (out_row)
                 dispatcher.utter_message(text = out_text)
             else:
                 dispatcher.utter_message(text = "క్షమించండి! భాష కోసం మాకు రికార్డులు లేవు %s" % translator.translate(query_lang,dest='te').text)
